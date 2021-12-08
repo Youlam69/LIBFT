@@ -21,9 +21,6 @@ ft_putendl_fd.c \
 ft_putnbr_fd.c \
 ft_putstr_fd.c \
 ft_split.c \
-ft_str_longuest_word.c \
-ft_str_word_count.c \
-ft_strcat.c \
 ft_strchr.c \
 ft_strdup.c \
 ft_strjoin.c \
@@ -38,9 +35,12 @@ ft_strtrim.c \
 ft_substr.c \
 ft_tolower.c \
 ft_toupper.c \
-ft_word_length.c
+# ft_str_longuest_word.c \
+# ft_str_word_count.c \
+# ft_strcat.c 
+# ft_word_length.c
 OBJS = $(FCTS:.c=.o)
-BONUS_FCTS = ft_lstadd_back_bonus.c \
+# BONUS_FCTS = ft_lstadd_back_bonus.c \
 ft_lstadd_front_bonus.c \
 ft_lstclear_bonus.c \
 ft_lstdelone_bonus.c \
@@ -49,14 +49,14 @@ ft_lstlast_bonus.c \
 ft_lstmap_bonus.c \
 ft_lstnew_bonus.c \
 ft_lstsize_bonus.c
-BONUS_OBJS = $(BONUS_FCTS:.c=.o)
+# BONUS_OBJS = $(BONUS_FCTS:.c=.o)
 NAME = libft.a
 
 all: $(NAME)
 
-bonus: $(BONUS_OBJS) $(OBJS)
-	ar rc $(NAME) $(OBJS) $(BONUS_OBJS)
-	ranlib $(NAME)
+# bonus: $(BONUS_OBJS) $(OBJS)
+	# ar rc $(NAME) $(OBJS) $(BONUS_OBJS)
+	# ranlib $(NAME)
 
 $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
@@ -65,11 +65,12 @@ $(NAME): $(OBJS)
 $(OBJS): $(FCTS)
 	gcc $(FLAGS) -I $(HEADER) -c $(FCTS)
 
-$(BONUS_OBJS): $(BONUS_FCTS)
-	gcc $(FLAGS) -I $(HEADER) -c $(BONUS_FCTS)
+# $(BONUS_OBJS): $(BONUS_FCTS)
+	# gcc $(FLAGS) -I $(HEADER) -c $(BONUS_FCTS)
 
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS)
+	rm -f $(OBJS)
+	#  $(BONUS_OBJS)
 
 fclean: clean
 	rm -f $(NAME)

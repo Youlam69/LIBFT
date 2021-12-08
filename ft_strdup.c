@@ -3,18 +3,15 @@
 
 char	*ft_strdup(const char *s1)
 {
-	char			*m;
+	char			*str;
 	unsigned int	i;
 
-	m = malloc(ft_strlen((char *)s1) + 1);
-	if (!m)
-		return (0);
+	str = malloc(ft_strlen((char *)s1) + 1);
+	if (!str)
+		return (NULL);
 	i = 0;
-	while (s1[i] != '\0')
-	{
-		m[i] = s1[i];
-		i++;
-	}
-	m[i] = '\0';
-	return (m);
+	while (*s1)
+		str[i++] = *s1++;
+	str[i] = '\0';
+	return (str);
 }

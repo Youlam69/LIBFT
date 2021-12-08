@@ -3,7 +3,7 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	long long nbr;
+	long int	nbr;
 
 	nbr = n;
 	if (nbr < 0)

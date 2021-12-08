@@ -1,59 +1,56 @@
-
 #include "libft.h"
 
-int		size_of_n(long nbr)
+unsigned int	size_of_n(int nbr)
 {
-	int size;
+	unsigned int	i;
+	long int		n;
 
-	size = 1;
-	if (nbr < 0)
+	n = (long int)nbr;
+	i = 0;
+	if (n <= 0)
 	{
-		nbr *= -1;
-		size++;
+		n *= -1;
+		i++;
 	}
-	while (nbr > 9)
+	while (n > 0)
 	{
-		nbr /= 10;
-		size++;
+		n /= 10;
+		i++;
 	}
-	return (size);
+	return (i);
 }
 
-char	*lkhedma(char *buffer, long nbr, int i)
+char	*to_fill(char *tab, long int nbr)
 {
+	unsigned int	i;
+
+	i = size_of_n(nbr);
 	if (nbr < 0)
 	{
+		tab[0] = '-';
 		nbr *= -1;
 	}
-	if (nbr > 9)
+	tab[i--] = '\0';
+	while (nbr >= 10)
 	{
-		lkhedma(buffer, (nbr / 10), --i);
-		buffer[i] = (nbr % 10) + 48;
+		tab[i--] = nbr % 10 + 48;
+		nbr /= 10;
 	}
 	if (nbr < 10)
-	{
-		i--;
-		buffer[i] = nbr + 48;
-	}
-	return (buffer);
+		tab[i] = nbr % 10 + 48;
+	return (tab);
 }
 
 char	*ft_itoa(int n)
 {
-	long	nbr;
-	int		p;
-	int		i;
-	char	*buffer;
+	unsigned int	len;
+	long int		nbr;
+	char			*tab;
 
-	nbr = n;
-	p = size_of_n(nbr) + 1;
-	i = 0;
-	if (!(buffer = (char *)malloc(p * sizeof(char))))
-		return (0);
-	if (n < 0)
-		*buffer = '-';
-	while (i < (p - 1))
-		i++;
-	buffer[i] = '\0';
-	return (lkhedma(buffer, nbr, i));
+	nbr = (long int)n;
+	len = size_of_n(n) + 1;
+	tab = (char *)malloc(sizeof(char) * len);
+	if (!tab)
+		return (NULL);
+	return (to_fill(tab, nbr));
 }

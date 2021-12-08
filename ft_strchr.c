@@ -3,16 +3,14 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	unsigned int i;
-	unsigned int l;
+	unsigned int len;
 
-	i = 0;
-	l = ft_strlen((char *)s) + 1;
-	while (l--)
+	len = ft_strlen((char *)s) + 1;
+	while (len--)
 	{
-		if (s[i] == (char)c)
-			return ((char *)&s[i]);
-		i++;
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
 	}
 	return (0);
 }

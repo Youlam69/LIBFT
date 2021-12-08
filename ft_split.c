@@ -1,91 +1,77 @@
-
-
 #include "libft.h"
 
-int		word_length(char const *s, char c)
+int	size_str(char const *s, char c)
 {
-	unsigned int i;
+	int	len;
 
-	if (!s)
-		return (0);
-	i = 0;
-	while (s[i] != '\0' && !(s[i] == c))
-		i++;
-	return (i);
+	len = 0;
+	while (*s == c && *s)
+		s++;
+	while (s[len] != c && s[len])
+		len++;
+	return (len);
 }
 
-size_t	str_word_count(char const *s, char c)
+int	size_tab(char const *s, char c)
 {
-	char			*trimmed;
-	char			set[2];
-	unsigned int	i;
-	unsigned int	wc;
+	int	size_2d;
 
-	set[0] = c;
-	set[1] = '\0';
-	trimmed = ft_strtrim(s, (char const *)&set);
-	i = 0;
-	if (ft_strlen((char const *)trimmed) == 0)
-		return (i);
-	wc = 1;
-	while (trimmed[i] != '\0')
+	size_2d = 0;
+	while (*s)
 	{
-		if (trimmed[i] == c)
-			wc++;
-		while (trimmed[i] == c)
-			i++;
-		i++;
-	}
-	return (wc);
-}
-
-void	freetabs(char **splited, unsigned int index)
-{
-	unsigned int i;
-
-	i = 0;
-	while (i < index)
-	{
-		free(splited[i]);
-		i++;
-	}
-	free(splited);
-	splited = NULL;
-}
-
-char	**aammer(char **splited, char const *s, char c, unsigned int i)
-{
-	unsigned int index;
-	unsigned int len;
-
-	index = 0;
-	while (s[i] != '\0' && (index < str_word_count(s, c)))
-	{
-		while ((s[i] == c) && s[i] != '\0')
-			i++;
-		len = word_length(&s[i], c);
-		if (!(splited[index] = ft_substr(s, i, len)))
+		if (*s != c)
 		{
-			freetabs(splited, index);
-			return (0);
+			size_2d++;
+			while (*s != c && *s)
+				s++;
 		}
-		index++;
-		i += len;
+		while (*s == c && *s)
+			s++;
 	}
-	splited[index] = 0;
-	return (splited);
+	return (size_2d);
+}
+
+char const	*alloc_str(char **tab, char const *s, char c, int i)
+{
+	int		j;
+	char	*str;
+
+	j = 0;
+	str = malloc(sizeof(char) * size_str(s, c) + 1);
+	if (!str)
+	{
+		while (i >= 0)
+			free(tab[i--]);
+		free(tab);
+		return (NULL);
+	}
+	while (*s && *s != c)
+		str[j++] = *s++;
+	str[j] = '\0';
+	tab[i] = str;
+	i++;
+	return (s);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char			**splited;
-	unsigned int	i;
+	char	**tab;
+	int		i;
 
-	if (!s || !(splited = (char **)malloc((str_word_count(s, c) + 1)
-					* sizeof(char *))))
-		return (0);
+	if (!s)
+		return (NULL);
+	tab = malloc(sizeof (char *) * size_tab(s, c) + 1);
+	if (!tab)
+		return (NULL);
 	i = 0;
-	if (!(splited = aammer(splited, s, c, i)))
-		return (0);
-	return (splited);
+	while (*s)
+	{
+		if (*s != c)
+			s = alloc_str (tab, s, c, i++);
+		if (!*s)
+			break ;
+		s++;
+	}
+	tab[i] = NULL;
+	return (tab);
 }
