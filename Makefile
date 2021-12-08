@@ -35,6 +35,7 @@ ft_strtrim.c \
 ft_substr.c \
 ft_tolower.c \
 ft_toupper.c \
+ft_striteri.c
 # ft_str_longuest_word.c \
 # ft_str_word_count.c \
 # ft_strcat.c 
@@ -53,7 +54,6 @@ ft_lstsize_bonus.c
 NAME = libft.a
 
 all: $(NAME)
-
 # bonus: $(BONUS_OBJS) $(OBJS)
 	# ar rc $(NAME) $(OBJS) $(BONUS_OBJS)
 	# ranlib $(NAME)

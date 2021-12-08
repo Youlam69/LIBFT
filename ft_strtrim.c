@@ -1,9 +1,9 @@
 
 #include "libft.h"
 
-int		to_be_trimmed(char c, char const *set)
+int	to_be_trimmed(char c, char const *set)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	i = 0;
 	while (set[i] != '\0')
