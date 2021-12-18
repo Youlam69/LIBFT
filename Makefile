@@ -1,6 +1,7 @@
 
-FLAGS = -Wall -Wextra -Werror
-HEADER = libft.h
+CFLAGS = -Wall -Wextra -Werror
+AR = ar rc
+CC = gcc
 FCTS = ft_atoi.c \
 ft_bzero.c \
 ft_calloc.c \
@@ -10,7 +11,6 @@ ft_isascii.c \
 ft_isdigit.c \
 ft_isprint.c \
 ft_itoa.c \
-ft_memccpy.c \
 ft_memchr.c \
 ft_memcmp.c \
 ft_memcpy.c \
@@ -36,43 +36,35 @@ ft_substr.c \
 ft_tolower.c \
 ft_toupper.c \
 ft_striteri.c
-# ft_str_longuest_word.c \
-# ft_str_word_count.c \
-# ft_strcat.c 
-# ft_word_length.c
+
 OBJS = $(FCTS:.c=.o)
-# BONUS_FCTS = ft_lstadd_back_bonus.c \
-ft_lstadd_front_bonus.c \
-ft_lstclear_bonus.c \
-ft_lstdelone_bonus.c \
-ft_lstiter_bonus.c \
-ft_lstlast_bonus.c \
-ft_lstmap_bonus.c \
-ft_lstnew_bonus.c \
-ft_lstsize_bonus.c
-# BONUS_OBJS = $(BONUS_FCTS:.c=.o)
+BONUS_FCTS = ft_lstnew.c \
+ft_lstadd_back.c \
+ft_lstadd_front.c \
+ft_lstclear.c \
+ft_lstdelone.c \
+ft_lstiter.c \
+ft_lstlast.c \
+ft_lstsize.c \
+ft_lstmap.c
+
+BONUS_OBJS = $(BONUS_FCTS:.c=.o)
 NAME = libft.a
 
-all: $(NAME)
-# bonus: $(BONUS_OBJS) $(OBJS)
-	# ar rc $(NAME) $(OBJS) $(BONUS_OBJS)
-	# ranlib $(NAME)
-
 $(NAME): $(OBJS)
-	ar rc $(NAME) $(OBJS)
-	ranlib $(NAME)
+	@$(AR) $@ $^
 
-$(OBJS): $(FCTS)
-	gcc $(FLAGS) -I $(HEADER) -c $(FCTS)
+all: $(NAME)
 
-# $(BONUS_OBJS): $(BONUS_FCTS)
-	# gcc $(FLAGS) -I $(HEADER) -c $(BONUS_FCTS)
+bonus: $(BONUS_OBJS)
+	@$(AR) $(NAME) $^
 
 clean:
-	rm -f $(OBJS)
-	#  $(BONUS_OBJS)
+	@rm -f $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: fclean clean all re

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylamraou <ylamraou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/17 01:33:07 by ylamraou          #+#    #+#             */
+/*   Updated: 2021/12/18 19:01:59 by ylamraou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-unsigned int	size_of_n(int nbr)
+static unsigned int	size_of_n(int nbr)
 {
 	unsigned int	i;
 	long int		n;
@@ -20,7 +32,7 @@ unsigned int	size_of_n(int nbr)
 	return (i);
 }
 
-char	*to_fill(char *tab, long int nbr)
+static char	*to_fill(char *tab, long int nbr)
 {
 	unsigned int	i;
 
@@ -43,13 +55,11 @@ char	*to_fill(char *tab, long int nbr)
 
 char	*ft_itoa(int n)
 {
-	unsigned int	len;
 	long int		nbr;
 	char			*tab;
 
 	nbr = (long int)n;
-	len = size_of_n(n) + 1;
-	tab = (char *)malloc(sizeof(char) * len);
+	tab = (char *)malloc(sizeof(char) * (size_of_n(n) + 1));
 	if (!tab)
 		return (NULL);
 	return (to_fill(tab, nbr));

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylamraou <ylamraou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/17 01:32:15 by ylamraou          #+#    #+#             */
+/*   Updated: 2021/12/17 01:32:18 by ylamraou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
@@ -8,7 +19,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	char			*src1;
 
 	if (!dst && !src)
-		return (0);
+		return (NULL);
 	dst1 = (char *)dst;
 	src1 = (char *)src;
 	i = 0;

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylamraou <ylamraou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/17 01:29:51 by ylamraou          #+#    #+#             */
+/*   Updated: 2021/12/18 19:10:35 by ylamraou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-int	size_str(char const *s, char c)
+static int	size_str(char const *s, char c)
 {
 	int	len;
 
@@ -12,7 +24,7 @@ int	size_str(char const *s, char c)
 	return (len);
 }
 
-int	size_tab(char const *s, char c)
+static int	size_tab(char const *s, char c)
 {
 	int	size_2d;
 
@@ -31,7 +43,7 @@ int	size_tab(char const *s, char c)
 	return (size_2d);
 }
 
-char const	*alloc_str(char **tab, char const *s, char c, int i)
+static char const	*alloc_str(char **tab, char const *s, char c, int i)
 {
 	int		j;
 	char	*str;
